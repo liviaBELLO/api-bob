@@ -22,6 +22,15 @@ database.once('connected', () => {
 // Cria uma instância do aplicativo Express
 const app = express()
 
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+  });
+
 // Habilita o uso de URL encoded e JSON para analisar as requisições HTTP
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
