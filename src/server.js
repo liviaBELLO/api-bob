@@ -4,6 +4,14 @@ require('dotenv').config();
 var express = require('express')
 const mongoose = require('mongoose');
 
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+  });
 
 // Obtém a string de conexão do MongoDB 
 const mongoString = "mongodb+srv://emerson:n93nRqzscsPsoucA@api-bob.al8iezv.mongodb.net/?retryWrites=true&w=majority&appName=api-bob";
