@@ -4,14 +4,8 @@ require('dotenv').config();
 var express = require('express')
 const mongoose = require('mongoose');
 
-app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    next();
-  });
+
+
 
 // Obtém a string de conexão do MongoDB 
 const mongoString = "mongodb+srv://emerson:n93nRqzscsPsoucA@api-bob.al8iezv.mongodb.net/?retryWrites=true&w=majority&appName=api-bob";
@@ -34,6 +28,16 @@ const app = express()
 // Habilita o uso de URL encoded e JSON para analisar as requisições HTTP
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+//Importa os controladores responsáveis por lidar com as requisições relacionadas a cartões e listas favoritas
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+  });
 
 // Define a porta em que o servidor irá escutar
 var port = 8080;
