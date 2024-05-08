@@ -4,7 +4,8 @@ require('dotenv').config();
 var express = require('express')
 const mongoose = require('mongoose');
 
-// Obtém a string de conexão do MongoDB a partir das variáveis de ambiente definidas no arquivo .env
+
+// Obtém a string de conexão do MongoDB 
 const mongoString = "mongodb+srv://emerson:n93nRqzscsPsoucA@api-bob.al8iezv.mongodb.net/?retryWrites=true&w=majority&appName=api-bob";
 // Conecta-se ao banco de dados MongoDB utilizando a string de conexão fornecida
 mongoose.connect(mongoString);
