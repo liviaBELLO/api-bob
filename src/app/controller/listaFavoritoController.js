@@ -1,24 +1,31 @@
 // Importa o modelo de Lista do diretório '../model/listaFavorito'
 const Lista = require('../model/listaFavorito');
 
-//Função assíncrona para salvar uma nova lista de favoritos
+// Função assíncrona para salvar uma nova lista de favoritos
 exports.saveLista = async (req, res) => {
-    // Cria uma nova instância do modelo Lista com os dados recebidos da requisição
-  const lista = new Lista({
-      nome: req.body.nome,
-      listaCard: req.body.listaCard,
-  })
- // Tenta salvar a lista no banco de dados
-// Se a operação for bem sucedida, retorna a lista salva com status 200 (OK)
-// Se ocorrer um erro, retorna uma mensagem de erro com status 400 (Bad Request)
   try {
-      const saveLista = await lista.save();
-      res.status(200).json(saveLista);
+    // Verifica se já existe uma lista com o mesmo código
+    const existingLista = await Lista.findOne({ codigo: req.body.codigo });
+    // Se existir, retorna um erro com status 400
+    if (existingLista) {
+      return res.status(400).json({ message: 'O código da lista já existe.' });
+    }
+
+    // Cria uma nova instância do modelo Lista com os dados recebidos da requisição
+    const lista = new Lista({
+      codigo: req.body.codigo,
+      listaCard: req.body.listaCard,
+    });
+
+    // Tenta salvar a lista no banco de dados
+    const saveLista = await lista.save();
+    // Se a operação for bem sucedida, retorna a lista salva com status 200 (OK)
+    res.status(200).json(saveLista);
   } catch (error) {
-      res.status(400).json({ message: error.message });
+    // Se ocorrer um erro, retorna uma mensagem de erro com status 400 (Bad Request)
+    res.status(400).json({ message: error.message });
   }
 }
-
 // Função assíncrona para obter todas as listas de favoritos
 exports.getAllLista = async (req, res) => {
   try {

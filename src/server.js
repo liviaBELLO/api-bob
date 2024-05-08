@@ -5,7 +5,7 @@ var express = require('express')
 const mongoose = require('mongoose');
 
 // Obtém a string de conexão do MongoDB a partir das variáveis de ambiente definidas no arquivo .env
-const mongoString ="mongodb+srv://emerson:n93nRqzscsPsoucA@api-bob.al8iezv.mongodb.net/?retryWrites=true&w=majority&appName=api-bob"
+const mongoString = process.env.DATABASE_MONGODB
 // Conecta-se ao banco de dados MongoDB utilizando a string de conexão fornecida
 mongoose.connect(mongoString);
 const database = mongoose.connection;
@@ -22,21 +22,12 @@ database.once('connected', () => {
 // Cria uma instância do aplicativo Express
 const app = express()
 
-app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    next();
-  });
-
 // Habilita o uso de URL encoded e JSON para analisar as requisições HTTP
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Define a porta em que o servidor irá escutar
-var port = 8081;
+var port = 8080;
 // Importa as rotas definidas no arquivo routes.js
 const routes = require('./routes/routes');
 
