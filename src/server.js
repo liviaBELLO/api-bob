@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 
 
 // Obtém a string de conexão do MongoDB 
-const mongoString = "mongodb+srv://emerson:admin123@api-bob.al8iezv.mongodb.net/?retryWrites=true&w=majority&appName=api-bob";
+const mongoString = "mongodb+srv://emerson:admin1293@api-bob.al8iezv.mongodb.net/?retryWrites=true&w=majority&appName=api-bob";
 // Conecta-se ao banco de dados MongoDB utilizando a string de conexão fornecida
 mongoose.connect(mongoString);
 const database = mongoose.connection;
